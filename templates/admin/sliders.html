@@ -1,0 +1,111 @@
+{% extends 'admin/base.html' %}
+
+{% block title %} عسل طهران | مدیریت اسلایدر ها {% endblock %}
+
+{% block header %}
+
+<style>
+    .card {
+    background: rgb(255, 255, 255);
+    border: 3px solid #d7ab4a;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 2rem;
+  }
+</style>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+{% with messages = get_flashed_messages(True) %}
+{% if messages %}
+<div class="row">
+  {% for message in messages %}
+  <div class="card {{message[0]}} text-white">
+    <div class="card-body">
+      {{ message[1] }}
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="rounded" style="width: 100%; height: 300px; border: 5px solid #d7ab4a;" >
+
+    <center><button style="margin-top: 100px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">افزودن اسلایدر</button></center>
+
+<div style="direction: rtl;" class="modal fade text-right" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div  class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">افزودن اسلایدر</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button> -->
+    </div>
+      
+      <div class="modal-body">
+        <form action="{{url_for('admin.create_slider')}}" method="POST" enctype="multipart/form-data">
+          {{ form.hidden_tag() }}
+          <div class="form-group">
+            <label for="slider_title" class="col-form-label">عنوان اسلایدر:</label>
+            <input name="slider_title" placeholder="عنوان اسلایدر" type="text" class="form-control" id="slider_title" required>
+          </div>
+
+
+          <div class="form-group">
+            <label for="slider_link" class="col-form-label">لینک اسلایدر:</label>
+            <input name="slider_link" placeholder="لینک اسلایدر" type="text" class="form-control" id="slider_link" required>
+          </div>
+
+          <div class="form-group">
+            <label for="slider_image" class="col-form-label">عکس اسلایدر:</label><br>
+            <input name="slider_image" type="file" id="slider_image" required>
+          </div>
+
+
+          <div class="modal-footer">
+            <button style="margin-left: 10px;" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+            <button type="submit" class="btn btn-primary">ثبت</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+<center> <h2 style="margin-top: 20px;">اسلایدر ها</h2> </center>
+
+<div class="container mx-auto mt-4">
+  <div style="margin-top: 50px;" class="row">
+    {% for slider in sliders %}
+    <form method="POST" action="{{slider.image}}"></form>
+
+    <div class="col-md-4 text-right">
+      <div class="card" style="width: 18rem;">
+        <img src=" {{ url_for('static' , filename=slider.image) }}" class="card-img-top" alt="{{ slider.title }}"></a>
+        <div class="card-body">
+          <h5 class="card-title">{{slider.title}}</h5>
+
+          <a href="{{url_for('admin.delete_slider' , slider_id=slider.id)}}" class="btn btn-danger mr-2"><i class="fas fa-link"></i> حذف</a>
+          <!-- <a href="#" class="btn "><i class="fab fa-github"></i> Github</a> -->
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    
+    
+    </div>
+  </div>
+</div>
+{% endblock %}
+

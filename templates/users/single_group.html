@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block title %} عسل طهران | دسته بندی محصولات | {{ group.title }}{% endblock %}
+
+{% block metadesc %} {group.description}} {% endblock %}
+
+
+{% block header %}
+
+<style>
+    .gallery.a {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(15, 40vw);
+    grid-template-rows: 1fr;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    overflow: scroll;
+    height:250px;
+    /* height: 100%; */
+    scroll-snap-type: both mandatory left;
+    scroll-padding: 1rem;
+    
+}
+
+.active {
+    scroll-snap-type: unset;
+}
+
+li.m {
+    /* scroll-snap-align: center; */
+    display: inline-block;
+    border-radius: 3px;
+    font-size: 0;
+}
+</style>
+
+
+{% endblock %}
+
+
+
+{% block body %}
+
+
+<section class="featured spad">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>{{group.title}}</h2>
+                </div>
+                <!-- <div class="featured__controls">
+                    <ul>
+                        <li class="active" data-filter="*">All</li>
+                        <li data-filter=".oranges">Oranges</li>
+                        <li data-filter=".fresh-meat">Fresh Meat</li>
+                        <li data-filter=".vegetables">Vegetables</li>
+                        <li data-filter=".fastfood">Fastfood</li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+<div class="row featured__filter">
+    {% for mahsol in royals %}
+    <a href="{{ url_for('users.single_royal' , slug = mahsol.slug) }}">
+    <div style="margin-top: 10px;" class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+        <div class="featured__item" style="border: 5px solid #d7ab4a; border-radius: 10px;">
+            <div class="featured__item__pic">
+                <img src="{{ url_for('static' , filename=mahsol.image) }}"  alt="{{mahsol.title}}">
+                <!-- <ul class="featured__item__pic__hover">
+                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul> -->
+            </div>
+            <div class="featured__item__text text-left">
+                <center><h6>{{mahsol.title}}</h6></center>
+                <h5 style="margin-left: 10px;">{{mahsol.price}} ت</h5>
+            </div>
+        </div></a>
+    </div>
+    {% endfor %}
+
+    {% for mahsol in baremooms %}
+    <a href="{{ url_for('users.single_baremoom' , slug = mahsol.slug) }}">
+    <div style="margin-top: 10px;" class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+        <div class="featured__item" style="border: 5px solid #d7ab4a; border-radius: 10px;">
+            <div class="featured__item__pic">
+                <img src="{{ url_for('static' , filename=mahsol.image) }}"  alt="{{mahsol.title}}">
+                <!-- <ul class="featured__item__pic__hover">
+                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul> -->
+            </div>
+            <div class="featured__item__text text-left">
+                <center><h6>{{mahsol.title}}</h6></center>
+                <h5 style="margin-left: 10px;">{{mahsol.price_100g}} ت</h5>
+            </div>
+        </div></a>
+    </div>
+    {% endfor %}
+
+    {% for mahsol in garde_gols %}
+    <a href="{{ url_for('users.single_garde' , slug = mahsol.slug) }}">
+    <div style="margin-top: 10px;" class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+        <div class="featured__item" style="border: 5px solid #d7ab4a; border-radius: 10px;">
+            <div class="featured__item__pic">
+                <img src="{{ url_for('static' , filename=mahsol.image) }}"  alt="{{mahsol.title}}">
+                <!-- <ul class="featured__item__pic__hover">
+                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul> -->
+            </div>
+            <div class="featured__item__text text-left">
+                <center><h6>{{mahsol.title}}</h6></center>
+                <h5 style="margin-left: 10px;">{{mahsol.price_100g}} ت</h5>
+            </div>
+        </div></a>
+    </div>
+    {% endfor %}
+    
+    
+    
+    
+    {% for mahsol in all_mahsolat %}
+    <a href="{{ url_for('users.single_mahsol' , slug = mahsol.slug) }}">
+    <div style="margin-top: 10px;" class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+        <div class="featured__item" style="border: 5px solid #d7ab4a; border-radius: 10px;">
+            <div class="featured__item__pic">
+                <img src="{{ url_for('static' , filename=mahsol.image) }}"  alt="{{mahsol.title}}">
+                <!-- <ul class="featured__item__pic__hover">
+                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul> -->
+            </div>
+            <div class="featured__item__text text-left">
+                <center><h6>{{mahsol.title}}</h6></center>
+                <h5 style="margin-left: 10px;">{{mahsol.price_1kg}} ت</h5>
+            </div>
+        </div></a>
+    </div>
+    {% endfor %}
+</div>
+</div>
+</section>
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block title %}عسل طهران | ثبت نام{% endblock %}
+{% block metadesc %}عسل  طهران | ثبت نام{% endblock %}
+
+
+
+{% block header %}
+<style>
+
+
+
+.login {
+  /* width: 50%px; */
+  padding: 8% 0 0;
+  margin: auto;
+  font-family: 'Mikhak', sans-serif;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  border-radius: 10px;
+  max-width: 360px;
+  margin: -50px auto 100px;
+  padding: 45px;
+  text-align: center;
+  /* box-shadow: 5px 5px 5px  5px black; */
+  border: 3px solid #d7ab4a;
+}
+
+.form input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: 'Mikhak', sans-serif;
+}
+
+.form input:focus {
+  background: #dbdbdb;
+}
+
+.form button {
+  font-family: 'Mikhak', sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #d7ab4a;
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.form button:active {
+  background: #d7ab4a;
+}
+
+.form span {
+  font-size: 75px;
+  color: #d7ab4a;
+}
+</style>
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="login">
+    <div class="form">
+
+      <form action="{{url_for('users.register')}}" class="login-form" method="POST">
+        <span class="material-icons">
+            <h3>ثبت نام</h3>
+        </span>
+
+        <div style="direction: rtl;margin-top: 30px;">
+            {{ form.hidden_tag()}}
+            {% with messages = get_flashed_messages(True) %}
+            {% if messages %}
+            <div class="row">
+                {% for message in messages %}
+                <div class="card {{message[0]}} text-white">
+                    <div class="card-body">
+                        {{ message[1] }}
+                    </div>
+                </div>
+                {% endfor %}
+        
+            </div>
+            {% endif %}
+            {% endwith %}
+            <br>
+        </div>
+
+        <br>
+        <input name="username" type="text" placeholder="نام کاربری" required/>
+        <input name="email" type="email" placeholder="آدرس ایمیل" required/>
+        <input name="password" type="password" placeholder="گذرواژه" required />
+        <input name="confirm_password" type="password" placeholder="تکرار گذرواژه" required />
+
+        <button type="submit">ثبت نام</button>
+        <p style="margin-top: 15px;">حساب کاربری دارید؟ <a href="{{url_for('users.login')}}">ورود</a></p>
+      </form>  
+    </div>
+  </div>
+
+{% endblock %}

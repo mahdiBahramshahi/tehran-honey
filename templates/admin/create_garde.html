@@ -1,0 +1,249 @@
+{% extends 'admin/base.html' %}
+{% block title %}عسل طهران | افزودن گرده گل{% endblock %}
+
+
+{% block header %}
+
+<style>
+    body {
+        color: #000;
+        overflow-x: hidden;
+        height: 100%;
+        /* background-image: url("https://i.imgur.com/GMmCQHC.png"); */
+        background-color: #fae7e7;
+        background-repeat: no-repeat;
+        background-size: 100% 100%
+    }
+
+    .card {
+        padding: 30px 40px;
+        margin-top: 60px;
+        margin-bottom: 60px;
+        border: none !important;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2)
+    }
+
+    .blue-text {
+        color: #00BCD4
+    }
+
+    .form-control-label {
+        margin-bottom: 0
+    }
+
+    input,
+    textarea,
+    button {
+        padding: 8px 15px;
+        border-radius: 5px !important;
+        margin: 5px 0px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        font-size: 18px !important;
+        font-weight: 300
+    }
+
+    input:focus,
+    textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: 1px solid #00BCD4;
+        outline-width: 0;
+        font-weight: 400
+    }
+
+    .btn-block {
+        text-transform: uppercase;
+        font-size: 15px !important;
+        font-weight: 400;
+        height: 43px;
+        cursor: pointer
+    }
+
+    .btn-block:hover {
+        color: #fff !important
+    }
+
+    button:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        outline-width: 0
+    }
+</style>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center" style="direction: rtl;">
+            <!-- <h3>اضافه کردن گرده گل</h3> -->
+            <!-- <p class="blue-text">Just answer a few questions<br> so that we can personalize the right experience for
+                you.</p> -->
+            <div class="card">
+                <h5 class="text-center mb-4">اضافه کردن گرده گل</h5>
+                <form class="form-card" action="{{url_for('admin.register_garde')}}" method="POST" enctype="multipart/form-data">
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex text-right"> <label
+                                class="form-control-label px-3">نام کامل گرده گل<span class="text-danger">
+                                    *</span></label> <input value="{{session.get('mahsol_title')}}" type="text" id="mahsol_title" name="mahsol_title" maxlength="32"
+                                placeholder="نام گرده گل" onblur="validate(1)"> </div>
+                        <div class="form-group col-sm-6 flex-column d-flex text-right"> <label
+                                class="form-control-label px-3">دسته بندی گرده گل<span class="text-danger"> *</span></label>
+                            <input value="{{session.get('mahsol_category')}}" type="text" id="mahsol_category" name="mahsol_category" placeholder="دسته بندی" maxlength="32"
+                                onblur="validate(2)" required> </div>
+                    </div>
+
+                    
+                    <div class="row justify-content-between text-left">
+                        
+                        <div class="form-group col-sm-6 flex-column d-flex text-right"> <label
+                                class="form-control-label px-3">قیمت ۱۰۰ گرم<span class="text-danger">
+                                    *</span></label> <input value="{{session.get('mahsol_price_100g')}}" type="text" id="mahsol_price_100g" name="mahsol_price_100g" placeholder="قیمت گرده گل" maxlength="32"
+                                onblur="validate(3)" required> 
+                        </div>
+                        
+                        <div class="form-group col-sm-6 flex-column d-flex text-right"> <label
+                            class="form-control-label px-3">قیمت ۵۰ گرم<span class="text-danger">
+                                *</span></label> <input value="{{session.get('mahsol_price_50g')}}" type="text" id="mahsol_price_50g" name="mahsol_price_50g" placeholder="قیمت گرده گل" maxlength="32"
+                            onblur="validate(3)" required> 
+                    </div>
+        
+
+
+                        <div class="form-group col-sm-6 flex-column d-flex text-right">
+                             <label class="form-control-label px-3">تصویر گرده گل<span class="text-danger">*</span></label>
+                            <input type="file" id="mahsol_image" name="mahsol_image" maxlength="128" onblur="validate(4)">
+                        </div>
+
+                         
+                        <div class="form-group col-sm-6 flex-column d-flex text-right"> <label
+                            class="form-control-label px-3">نوع بسته بندی<span class="text-danger">
+                                *</span></label> <input type="text" id="bastebandi" name="bastebandi" placeholder="نوع بسته بندی" maxlength="128"
+                            onblur="validate(4)" required> </div> 
+
+                        <div class="form-group col-sm-6 flex-column d-flex text-right"> <label
+                            class="form-control-label px-3">طریقه مصرف<span class="text-danger">
+                                *</span></label> <input type="text" id="tarigh_masraf" name="tarigh_masraf" placeholder="طریقه مصرف" maxlength="128"
+                            onblur="validate(4)" required> </div> 
+                        
+                            
+                            <div class="form-group col-sm-6 flex-column d-flex text-right"> <label
+                                class="form-control-label px-3">موارد منع مصرف<span class="text-danger">
+                                    *</span></label> <input type="text" id="manh_masraf" name="manh_masraf" placeholder="موارد منع مصرف" maxlength="128"
+                                onblur="validate(4)" required> </div>
+
+                         
+                        <div class="form-group col-sm-6 flex-column d-flex text-right"> <label
+                            class="form-control-label px-3">خواص درمانی<span class="text-danger">
+                                *</span></label> <input type="text" id="khavas_darmani" name="khavas_darmani" placeholder="خواص درمانی" maxlength="128"
+                            onblur="validate(4)" required> </div> 
+                    </div>
+                    
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-12 flex-column d-flex text-right"> 
+                            <label class="form-control-label px-3">توضیحات کامل گرده گل<span class="text-danger"> *</span></label>
+                            <input type="text" id="mahsol_description" name="mahsol_description" placeholder="" onblur="validate(6)"> </div>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="form-group col-sm-6"> <button type="submit"
+                                class="btn-block btn-success">ثبت گرده گل</button> </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+<script>function validate(val) {
+    v1 = document.getElementById("fname");
+    v2 = document.getElementById("lname");
+    v3 = document.getElementById("email");
+    v4 = document.getElementById("mob");
+    v5 = document.getElementById("job");
+    v6 = document.getElementById("ans");
+
+    flag1 = true;
+    flag2 = true;
+    flag3 = true;
+    flag4 = true;
+    flag5 = true;
+    flag6 = true;
+
+    if (val >= 1 || val == 0) {
+        if (v1.value == "") {
+            v1.style.borderColor = "red";
+            flag1 = false;
+        }
+        else {
+            v1.style.borderColor = "green";
+            flag1 = true;
+        }
+    }
+
+    if (val >= 2 || val == 0) {
+        if (v2.value == "") {
+            v2.style.borderColor = "red";
+            flag2 = false;
+        }
+        else {
+            v2.style.borderColor = "green";
+            flag2 = true;
+        }
+    }
+    if (val >= 3 || val == 0) {
+        if (v3.value == "") {
+            v3.style.borderColor = "red";
+            flag3 = false;
+        }
+        else {
+            v3.style.borderColor = "green";
+            flag3 = true;
+        }
+    }
+    if (val >= 4 || val == 0) {
+        if (v4.value == "") {
+            v4.style.borderColor = "red";
+            flag4 = false;
+        }
+        else {
+            v4.style.borderColor = "green";
+            flag4 = true;
+        }
+    }
+    if (val >= 5 || val == 0) {
+        if (v5.value == "") {
+            v5.style.borderColor = "red";
+            flag5 = false;
+        }
+        else {
+            v5.style.borderColor = "green";
+            flag5 = true;
+        }
+    }
+    if (val >= 6 || val == 0) {
+        if (v6.value == "") {
+            v6.style.borderColor = "red";
+            flag6 = false;
+        }
+        else {
+            v6.style.borderColor = "green";
+            flag6 = true;
+        }
+    }
+
+    flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6;
+
+    return flag;
+}</script>
+
+{% endblock %}
+

@@ -1,0 +1,490 @@
+{% extends 'base.html' %}
+
+{% block title %} عسل طهران | محصولات | {{mahsol.descriprion}} {% endblock %}
+
+{% block metadesc %} {{ mahsol.description }} {% endblock %}
+
+{% block header %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+
+
+<style>
+        /* body{
+            direction: ltr;
+        }
+        p{
+            margin: 10px;
+        }
+        section{
+            direction: ltr;
+        } */
+
+
+
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --grid-column-gap: 20px;
+}
+
+/* body{
+    padding: 20px;
+} */
+
+.carouselPre{
+    grid-auto-flow: column;
+    display: grid;
+    grid-auto-columns: calc((100% - 3 * var(--grid-column-gap))/ 4);
+    grid-column-gap: var(--grid-column-gap);
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    list-style: none;
+    scroll-behavior: smooth;
+    
+}
+
+#title{
+    margin: 10px 10px 10px 0;
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.topT{
+    border-top: 1px solid rgb(212, 212, 212);
+    padding: 10px 0;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.itemsC .textDet{
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    /* display: flex; */
+}
+
+.contents{
+    color: white;
+}
+
+.itemsC .contents p{    
+    -webkit-line-clamp: 3;
+    /* text-align: center; */
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    font-size: 12px;
+    line-height: 1.25;
+    font-weight: 400;
+    width: 90%;
+    margin: auto;
+}
+
+.leftTxtDet{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 33px;
+}
+
+.itemsC{
+    position: relative;
+}
+
+.scrolly{
+    overflow: hidden;
+}
+
+.carouselPre li{
+  border: 4px solid #d7ab4a;
+    scroll-snap-align: start;
+    width: 100%;
+    height: 100%;
+    /* background-color: royalblue; */
+    list-style: none;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.carouselPre li .bgImg{
+    width: 100%;
+    height: 100%;
+}
+
+.carouselPre li img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.scrolly{
+    position: relative;
+}
+
+#left,#right{
+    background-color: rgba(255, 255, 255, 0.9);
+    outline: none;
+    border: transparent;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-60%);
+    cursor: pointer;
+    z-index: 2;
+}
+
+#left{
+    left: 0;
+}
+
+#right{
+    right: 0;
+}
+
+@media only screen and (max-width: 890px) {
+    .carouselPre {
+        grid-auto-columns: calc((100% - 2 * var(--grid-column-gap))/ 3);
+        height: 23rem;
+    }
+  }
+
+@media only screen and (max-width: 660px) {
+    .carouselPre {
+        grid-auto-columns: calc((100% - 1 * var(--grid-column-gap))/ 2);
+        height: 25rem;
+    }
+  }
+
+@media only screen and (max-width: 440px) {
+    .carouselPre {
+        grid-auto-columns: 100%;
+        height: 25rem;
+    }
+  }
+
+
+::-webkit-scrollbar {    
+  width: 15px;
+height: 15px;
+border-left: #ededed solid 1px;
+background-color: #fcfcfc;
+border-top: #ededed solid 1px;
+    }
+
+::-webkit-scrollbar-thumb:hover{
+cursor: pointer;
+background: #c7c7c7;
+width: 15px;
+    background-clip: content-box;
+    border: 4px solid transparent;
+border-radius: 10px;
+}
+
+    ::-webkit-scrollbar-button {   
+ display: none;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background: #dbdbdb;
+    background-clip: content-box;
+    border: 4px solid transparent;
+    border-radius: 10px;
+
+    }
+
+
+
+
+
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid" style="margin-top: 30px;direction: rtl;">
+        <div class="row">
+            
+
+
+
+
+            <div style="margin-top: 10px;" class=" col-12 col-sm-6 col-md-4">
+                <div style="border: 3px solid #d7ab4a;" class="card rounded">
+                    <img  src="{{url_for('static' , filename=mahsol.image)}}" alt="{{mahsol.title}}">
+                    <p class="text-center">{{mahsol.title}}</p>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div style="margin-top: 10px; max-height: 356px;border: 3px solid #d7ab4a;" class="card col-12 col-sm-4 col-md-4 text-right rounded d-none d-xs-block d-sm-none d-md-block">
+                <h4 class="text-center">{{mahsol.title}}</h4>
+                <!-- <p>توضیحات محصول:</p> -->
+                <p>{{mahsol.description}}</p>
+                
+                <ul class="list-group">
+                    <li><b> رنگ و طبع عسل :  </b> {{mahsol.rang_asal}}</li>
+                    <li><b> بهترین طریقه مصرف : </b> {{mahsol.tarigh_masraf}}</li>
+                    <li><b> محل رویش گیاه :  </b>{{mahsol.royesh_giah}}</li>
+                    <li><b> بسته بندی : </b> {{mahsol.bastebandi}}</li>
+                    <li><b> موارد منع مصرف: </b> {{mahsol.manh_masraf}}</li>
+                    <li><b> خواص درمانی: </b> {{mahsol.khavas_darmani}}</li>
+                </ul>
+                
+            </div>
+            
+            <br>
+            <div class=" col-12 col-sm-6 col-md-4 text-right" style="background: #ffffff; direction: ltr;margin-top: 10px;">
+                <div style="border: 3px solid #d7ab4a;" class="card rounded">
+
+                    <center><h6 style="margin: 10px;">فروشنده</h6><br>
+                    <i>____________________________</i><br><br>
+    
+                    <h8>عسل طهران</h8>
+
+    
+                    <p> ضمانت اصالت کالا ✅</p>
+
+                    <i>____________________________</i><br>
+                    <h3 id="price_data" style="direction: rtl;">{{mahsol.price_1kg}} ت</h3>
+                    </center>
+                    <form action="{{url_for('users.add_to_card')}}" method="post">
+                    <div class="row">
+
+                        <div class="col-12 col-sm-12" >
+
+                            <select id="price" onclick="show_price();" class="text-right" style="height: 35px;margin-right: 11px; direction: rtl;" name="price" id="price">
+                                <option value="{{mahsol.price_1kg}}">1 کیلوگرم</option>
+                                <option value="{{mahsol.price_05kg}}">500 گرم</option>
+                            </select>
+
+                        </div>
+                        
+                        <div class="col-8 col-sm-8">
+                        <button class="btn btn-warning" style="margin-top: 10px; width: 90%; margin-bottom: 20px;" type="submit" >افزودن به سبد</button>
+                        </div>
+                            <input name="mahsol_title" type="hidden" value="{{mahsol.title}}">
+                            <input name="id" type="hidden" value="{{mahsol.id}}">
+                            <input name="description" type="hidden" value="{{mahsol.description}}">
+                            <input name="slug" type="hidden" value="{{mahsol.slug}}">
+                            <input name="group" type="hidden" value="{{mahsol.group}}">
+                            <!-- <input name="price" type="hidden" value="{{mahsol.price}}"> -->
+                            <input name="image" type="hidden" value="{{mahsol.image}}">
+                            <input name="role" type="hidden" value="{{mahsol.role}}">
+                        <div class="col-4 col-sm-4">
+                            <input name="mahsol_count" style="margin-top: 10px; width: 90%; margin-bottom: 20px; margin-right: 20px;" type="number" class="btn btn-warning number" value="1" min="1">    
+                        </div>
+                    
+                    </div></form>
+                </div>
+                <div style="margin-top: 15px;" class="col-12 col-sm-12 d-none d-sm-block d-md-none d-block d-sm-none text-right card rounded">
+                    <h4 class="text-center">{{mahsol.title}}</h4>
+                    <p class="text-center">ویژگی های محصول:</p>
+                    <p class="text-center">{{mahsol.description}}</p>
+                    
+                </div>
+            </div>
+        </div>
+
+
+        
+    </div>
+<div class="container-fluid text-right"  style="margin-top: 20px;">
+    <div class="row">
+
+    <div class=" col-12 col-sm-6 col-md-4" >
+        <div style="margin-top: 10px; background-color: rgb(248, 246, 246); border: 1px solid #d7ab4a;" class="card rounded" >
+            <div class="row" >
+            <i style="font-size: xx-large; margin-right: 20px; color: #d7ab4a;" class="bi bi-eyedropper"></i>
+            <h4 style="margin-top: 20px; margin-right: 10px;">رنگ و طبع عسل:</h4>
+            </div>
+            <p style="margin-right: 20px;">{{mahsol.rang_asal}}</p>
+        </div>
+    </div>
+
+    <div class=" col-12 col-sm-6 col-md-4" >
+        <div style="margin-top: 10px; background-color: rgb(248, 246, 246); border: 1px solid #d7ab4a;" class="card rounded" >
+            <div class="row" >
+            <i style="font-size: xx-large; margin-right: 20px; color: #d7ab4a; " class="bi bi-stopwatch"></i>
+            <h4 style="margin-top: 20px; margin-right: 10px;">بهترین طریقه مصرف:</h4>
+            </div>
+            <p style="margin-right: 20px;">{{mahsol.tarigh_masraf}}</p>
+        </div>
+    </div>
+    
+    <div class=" col-12 col-sm-6 col-md-4" >
+        <div style="margin-top: 10px; background-color: rgb(248, 246, 246); border: 1px solid #d7ab4a;" class="card rounded" >
+            <div class="row" >
+            <i style="font-size: xx-large; margin-right: 20px; color: #d7ab4a; " class="bi bi-geo-alt"></i>
+            <h4 style="margin-top: 20px; margin-right: 10px;">محل رویش گیاه:</h4>
+            </div>
+            <p style="margin-right: 20px;">{{mahsol.royesh_giah}}</p>
+        </div>
+    </div>
+
+    <div class=" col-12 col-sm-6 col-md-4" >
+        <div style="margin-top: 10px; background-color: rgb(248, 246, 246); border: 1px solid #d7ab4a;" class="card rounded" >
+            <div class="row" >
+            <i style="font-size: xx-large; margin-right: 20px; color: #d7ab4a;" class="bi bi-box-seam"></i>
+            <h4 style="margin-top: 20px; margin-right: 10px;">بسته بندی:</h4>
+            </div>
+            <p style="margin-right: 20px;">{{mahsol.bastebandi}}</p>
+        </div>
+    </div>
+
+    <div class=" col-12 col-sm-6 col-md-4" >
+        <div style="margin-top: 10px; background-color: rgb(248, 246, 246); border: 1px solid #d7ab4a;" class="card rounded" >
+            <div class="row" >
+            <i style="font-size: xx-large; margin-right: 20px; color: #d7ab4a;" class="bi bi-x-circle"></i>
+            <h4 style="margin-top: 20px; margin-right: 10px;">موارد منع مصرف:</h4>
+            </div>
+            <p style="margin-right: 20px;">{{mahsol.manh_masraf}}</p>
+        </div>
+    </div>
+
+    <div class=" col-12 col-sm-6 col-md-4" >
+        <div style="margin-top: 10px; background-color: rgb(248, 246, 246); border: 1px solid #d7ab4a;" class="card rounded" >
+            <div class="row" >
+            <i style="font-size: xx-large; margin-right: 20px; color: #d7ab4a;" class="bi bi-brightness-high"></i>
+            <h4 style="margin-top: 20px; margin-right: 10px;">خواص درمانی:</h4>
+            </div>
+            <p style="margin-right: 20px;">{{mahsol.khavas_darmani}}</p>
+        </div>
+    </div>
+        
+
+    </div>
+</div>
+
+
+<br><br>
+
+<div style="direction: rtl;" class="scrolly text-right">
+    <center><h2 style="margin-top: 40px;" class="topT">محصولات مرتبط</h2></center>
+    <button id="left"><span class="material-icons">chevron_left</span></button>
+    <button id="right"><span class="material-icons">chevron_right</span></button>
+<ul class="carouselPre">
+  {% for mahsol in all_mahsolat %}
+  <a href="{{ url_for('users.single_mahsol' , slug = mahsol.title) }}">
+
+  <li class="itemsC">
+
+        <div class="bgImg"><img src="{{ url_for('static' , filename=mahsol.image) }}" alt="mahsol.title"></div>
+    
+        <div class="contents text-left">
+          <h1 class="leftTxtDet"></h1>
+          <div style="background-color: #d7ab4a;" class="textDet">
+            <center><p style="font-size: large;" class="text-white">{{ mahsol.title }}</p></center>
+            <p style="font-size: medium; margin-top: 10px;" class="text-white">{{ mahsol.price_1kg }} ت</p>
+            <br>
+        </div>
+      </div>
+    
+      </li>
+    </a>
+      {% endfor %}
+
+</ul>
+</div>
+ <br>
+<div class="row">
+{% for monasebat in monasebat %}
+<div style=" margin-top: 10px;" class="col-12 col-sm-6">
+    <a href="{{monasebat.link}}">
+        <img style="width: 100%; height: 100%;border-radius: 20px;" src="{{url_for('static' , filename=monasebat.image)}}" alt="{{monasebat.title}}">
+    </a>
+</div>
+{% endfor %}
+
+</div> 
+
+
+<br><br>
+    {% endblock %}
+
+
+{% block script %}
+
+<script>
+
+    function show_price() {
+        var a = document.getElementById('price').value;
+        if (a == '{{mahsol.price_1kg}}'){
+            document.getElementById("price_data").innerHTML = '{{mahsol.price_1kg}} ت';
+        }
+        else if (a == '{{mahsol.price_05kg}}'){
+            document.getElementById("price_data").innerHTML = '{{mahsol.price_05kg}} ت';
+        }
+        
+    }
+
+
+    outtester = document.getElementsByClassName('scrolly');
+for(var i = 0; i < outtester.length; i++){
+scrollification('scrolly', setyup = {
+    i: i,
+    scrollCont: '.carouselPre', 
+    itemsScroll: '.itemsC',
+    customButtons: true, 
+    butLeft: '#left', 
+    butRight: '#right'})
+}
+function scrollification(mainConter ,setyup = {i, scrollcont, itemsScroll, customButtons, butLeft, butRight}){
+    if(setyup.i == null){
+        out = document.getElementsByClassName(mainConter)[0];
+    }else{
+        out = document.getElementsByClassName(mainConter)[setyup.i];
+    }
+    
+    if(setyup.customButtons == true){
+        l = out.querySelector(setyup.butLeft);
+        r = out.querySelector(setyup.butRight);
+    }
+
+var out,
+a = out.querySelector(setyup.scrollCont),l, r,
+q =  out.querySelectorAll(setyup.itemsScroll);
+
+$(l).click(function(){getBack();});
+
+$(r).click(function(){getNext();});
+
+function getNext(){
+    for(var i = 0; i < q.length; i++){
+        if(q[i].getBoundingClientRect().left <= a.getBoundingClientRect().left + 50){
+            var index = q[i].offsetWidth;
+            $(a).scrollLeft($(a).scrollLeft() + index);
+        }
+    }
+}
+function getBack(){
+for(var i = 1; i < q.length; i++){
+    if(q[i].getBoundingClientRect().left < a.getBoundingClientRect().left + 50){
+        var index = q[i - 1].offsetWidth;
+        $(a).scrollLeft($(a).scrollLeft() - index);}}}
+}
+
+
+</script>
+
+{% endblock %}

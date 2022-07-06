@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %} عسل طهران | سبد خرید {% endblock %}
+
+
+
+
+{% block body %}
+
+<div style="direction: rtl;">
+    {% with messages = get_flashed_messages(True) %}
+    {% if messages %}
+    <div class="row">
+        {% for message in messages %}
+        <div class="card {{message[0]}} text-white">
+            <div class="card-body">
+                {{ message[1] }}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    {% endif %}
+    {% endwith %}
+</div>
+
+<section class="pt-5 pb-5 text-right" style="direction: rtl;">
+  <!-- <div class="container"> -->
+    <div class="row w-100">
+        <div class="col-lg-12 col-md-12 col-12">
+            <h3  class="display-5 mb-2 text-center">سبد خرید</h3>
+            <p class="mb-5 text-center">
+                <!-- <i class="text-info font-weight-bold">3</i> items in your cart</p> -->
+            <table  id="shoppingCart" class="table table-condensed table-responsive">
+                <thead>
+                    <tr>
+                        <th style="width:60%">عنوان کالا</th>
+                        <th style="width:12%">قیمت</th>
+                        <th style="width:10%">تعداد</th>
+                        <th style="width:16%"></th>
+                    </tr>
+                </thead>
+                <tbody class="text-right">
+                    {% for mahsol in user_mahsols %}
+                    <tr>
+                        <td data-th="Product" class="">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a href="{% if mahsol.mahsol_role==0 %} {{url_for('users.single_mahsol' , slug = mahsol.mahsol_slug) }} {% elif mahsol.mahsol_role==1 %} {{url_for('users.single_royal' , slug = mahsol.mahsol_slug) }}   {% elif mahsol.mahsol_role==2 %} {{url_for('users.single_baremoom' , slug = mahsol.mahsol_slug) }}   {% elif mahsol.mahsol_role==3 %} {{url_for('users.single_garde' , slug = mahsol.mahsol_slug) }}   {% endif %}"><img style="width: 100%; height: 100px; max-height: 60px; max-width: 70px;" src="{{url_for('static' , filename=mahsol.mahsol_image)}}" alt="" class="img-fluid rounded mb-2 shadow "></a>
+                                </div>
+                                <div class="col-md-9 mt-sm-2">
+                                    <a href="{% if mahsol.mahsol_role==0 %} {{url_for('users.single_mahsol' , slug = mahsol.mahsol_slug) }} {% elif mahsol.mahsol_role==1 %} {{url_for('users.single_royal' , slug = mahsol.mahsol_slug) }}   {% elif mahsol.mahsol_role==2 %} {{url_for('users.single_baremoom' , slug = mahsol.mahsol_slug) }}   {% elif mahsol.mahsol_role==3 %} {{url_for('users.single_garde' , slug = mahsol.mahsol_slug) }}   {% endif %}"><p style="font-size: large;">{{ mahsol.mahsol_title }} <br></p></a>
+                                    <!-- <p class="font-weight-light">Brand &amp; Name</p> -->
+                                </div>
+                            </div>
+                        </td>
+                        <td style="font-size: 16px;min-width: 96px;" data-th="Price">{{mahsol.mahsol_price}} ت</td>
+                        <td data-th="Quantity">
+                            <form  style="width: 100%;" id="form-id" action="{{url_for('users.modify_card' , slug= mahsol.mahsol_slug)}}" method="POST" enctype="multipart/form-data">
+                                <input style="min-width: 50px;" onclick="$(this).closest('form').submit();" onclick="$(this).closest('form').submit();" id="input_id" name="mahsol_count"  type="number" class="form-control form-control-sm text-center" value="{{mahsol.mahsol_count}}" min="1">
+                            </form>
+                        </td>
+                        <td class="actions">
+                            <div class="text-right">
+                                <!-- <button class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                    <i class="fas fa-sync"></i>
+                                </button> -->
+                                <a href="{{url_for('users.delete_mahsol' , mahsol_id=mahsol.id)}}">
+                                <button style="background-color: rgb(214, 37, 37);" class="btn btn-white border-secondary  btn-md mb-2">
+                                    <i style="color: white" class="bi bi-trash"></i>
+                                </button>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="float-left text-right">
+                <h5 >جمع کل:</h5>
+                <h3 >{{result_price}} تـــومان</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4 d-flex align-items-center">
+        <div class="col-12 col-sm-12 order-md-2 text-left">
+            <a href="catalog.html" class="btn btn-success mb-4 btn-lg pl-5 pr-5">تسویه حساب</a>
+        </div>
+        <!-- <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+            <a href="catalog.html">
+                <i class="fa fa-arrow-left mr-2"></i> Continue Shopping</a>
+        </div> -->
+    </div>
+</div>
+</section>
+
+
+{% endblock %}
+
+
+
+{% block script %}
+
+
+<script>
+
+// var form = document.getElementById("form-id");
+
+// document.getElementById("input_id").addEventListener("click", function () {
+//   form.submit();
+// });
+
+</script>
+
+
+{% endblock %}

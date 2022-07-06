@@ -1,0 +1,118 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}  عسل طهران | مدیریت گرده گل ها{% endblock %}
+
+
+{% block header %}
+
+<style>
+    .card {
+    background: rgb(255, 255, 255);
+    border: 3px solid #d7ab4a;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 2rem;
+  }
+</style>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+{% with messages = get_flashed_messages(True) %}
+{% if messages %}
+<div class="row">
+  {% for message in messages %}
+  <div class="card {{message[0]}} text-white">
+    <div class="card-body">
+      {{ message[1] }}
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="rounded" style="width: 100%; height: 300px; border: 5px solid #d7ab4a;" >
+
+    <center><button style="margin-top: 100px;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">افزودن محصول</button></center>
+
+<div style="direction: rtl;" class="modal fade text-right" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div  class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">افزودن گرده گل</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button> -->
+    </div>
+      
+      <div class="modal-body">
+        <form action="{{url_for('admin.create_garde')}}" method="POST">
+          <div class="form-group">
+            <label for="mahsol_title" class="col-form-label">عنوان گرده گل:</label>
+            <input name="mahsol_title" placeholder="عنوان گرده گل" type="text" class="form-control" id="mahsol_title" required>
+          </div>
+
+          <div class="form-group">
+            <label for="mahsol_category" class="col-form-label">دسته بندی</label>
+            <select style="width: 100%;" name="mahsol_category" id="mahsol_category">
+              {% for group in groups %}
+                <option value="{{group.title}}">{{group.title}}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mahsol_price_100g" class="col-form-label">قیمت ۱۰۰ گرم:(ت)</label>
+            <input name="mahsol_price_100g" placeholder="۱۰۰۰۰" type="text" class="form-control" id="mahsol_price_100g" required>
+          </div>
+
+
+          <div class="form-group">
+            <label for="mahsol_price_50g" class="col-form-label">قیمت ۵۰ گرم:(ت)</label>
+            <input name="mahsol_price_50g" placeholder="۱۰۰۰۰" type="text" class="form-control" id="mahsol_price_50g" required>
+          </div>
+
+
+          <div class="modal-footer">
+            <button style="margin-left: 10px;" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+            <button type="submit" class="btn btn-primary">تایید و ادامه</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div class="container mx-auto mt-4">
+  <div style="margin-top: 50px;" class="row">
+    {% for mahsol in all_mahsolat %}
+
+    <div class="col-md-4 text-right">
+      <div class="card" style="width: 18rem;">
+        <a href="{{ url_for('admin.single_garde' , slug = mahsol.title) }}"><img src=" {{ url_for('static' , filename=mahsol.image) }}" class="card-img-top" alt="{{mahsol.title}}"></a>
+        <div class="card-body">
+          <a href="{{ url_for('admin.single_garde' , slug = mahsol.title) }}">
+          <h5 class="card-title">{{mahsol.title}}</h5>
+        </a>
+          <a href="{{url_for('admin.delete_garde' , mahsol_id=mahsol.id)}}" class="btn btn-danger mr-2"><i class="fas fa-link"></i> حذف</a>
+          <a href="#">{{mahsol.mahsol_price}}</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    
+    
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
